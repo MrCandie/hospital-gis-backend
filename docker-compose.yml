@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgis/postgis:15-3.4
+    container_name: gis_postgres
+    restart: always
+    environment:
+      POSTGRES_DB: gis_hospital
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7
+    container_name: gis_redis
+    ports:
+      - "6379:6379"
+
+volumes:
+  postgres_data:
