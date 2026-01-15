@@ -4,9 +4,10 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const isProduction = process.env.NODE_ENV === "production";
+console.log(process.env.DATABASE_URL);
 
 const sequelize = isProduction
-  ? new Sequelize(process.env.DATABASE_URL, {
+  ? new Sequelize("dpg-d5kd2b7fte5s73cj8b6g-a", {
       dialect: "postgres",
       logging: false,
       dialectOptions: {
