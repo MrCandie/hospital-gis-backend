@@ -2,6 +2,49 @@ import Ambulance from "../models/ambulance.js";
 import AppError from "../utils/app-error.js";
 import catchAsync from "../utils/catch-async.js";
 
+// const nearbyAmbulances = [
+//   {
+//     name: "Lagos State Ambulance Service (LASAMBUS) – Yaba",
+//     lat: 6.5059,
+//     lng: 3.3753,
+//   },
+//   {
+//     name: "St John Ambulance – LUTH",
+//     lat: 6.5259,
+//     lng: 3.3962,
+//   },
+//   {
+//     name: "LUTH Emergency Ambulance Unit",
+//     lat: 6.5258,
+//     lng: 3.396,
+//   },
+//   {
+//     name: "Adeleye’s Signature Ambulance Service",
+//     lat: 6.5182,
+//     lng: 3.3857,
+//   },
+//   {
+//     name: "HelpOS Ambulance Service – Surulere",
+//     lat: 6.4955,
+//     lng: 3.3553,
+//   },
+//   {
+//     name: "LASAMBUS Emergency Point – Ilupeju",
+//     lat: 6.5486,
+//     lng: 3.3564,
+//   },
+//   {
+//     name: "Braingrace Ambulance Service",
+//     lat: 6.5273,
+//     lng: 3.3476,
+//   },
+//   {
+//     name: "Emergency Rescue Ambulance – Gbagada",
+//     lat: 6.5565,
+//     lng: 3.3889,
+//   },
+// ];
+
 export function formatData(list) {
   return list.map((el) => {
     const location = el.location;
@@ -25,6 +68,18 @@ export const createAmbulance = catchAsync(async (req, res, next) => {
   if (!name) return next(new AppError("Ambulance name is required", 400));
   if (!lat || !long)
     return next(new AppError("Ambulance coordinates are required", 400));
+
+  // const allLocations = nearbyAmbulances.map((el) => {
+  //   return {
+  //     name: el.name,
+  //     location: {
+  //       type: "Point",
+  //       coordinates: [Number(el.lat), Number(el.lng)],
+  //     },
+  //   };
+  // });
+
+  // await Ambulance.bulkCreate(allLocations);
 
   await Ambulance.create({
     name: name.toLowerCase(),
