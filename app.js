@@ -18,7 +18,7 @@ const app = express();
 
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://hospital-gis-frontend.vercel.app/",
+  "https://hospital-gis-frontend.vercel.app",
 ];
 
 app.use(
