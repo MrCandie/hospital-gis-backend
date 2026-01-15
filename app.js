@@ -16,7 +16,10 @@ import ambulanceRoute from "./router/ambulance.router.js";
 
 const app = express();
 
-const allowedOrigins = ["http://localhost:5173"];
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://hospital-gis-frontend.vercel.app/",
+];
 
 app.use(
   cors({
