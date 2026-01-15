@@ -27,14 +27,9 @@ https://documenter.getpostman.com/view/27220467/2sBXVhDWfZ
 
    ```
 
-3. Set up PostgreSQL:
+3. Create .env file and paste the environment variables (shared via email)
 
-- Paste the Docker configuration content (shared via email) into docker-compose.yml
-- Run Docker to start PostgreSQL
-
-4. Create .env file and paste the environment variables (shared via email)
-
-5. Start the server:
+4. Start the server:
    ```bash
    npm run dev
    ```
