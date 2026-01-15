@@ -6,38 +6,38 @@ import catchAsync from "../utils/catch-async.js";
 import { formatData } from "./ambulance.controller.js";
 import redisClient from "../config/redis.js";
 
-const allHospitals = [
-  {
-    name: "Unilag Medical Centre",
-    lat: 6.51454,
-    lng: 3.39655,
-  },
-  {
-    name: "Lagos University Teaching Hospital (LUTH)",
-    lat: 6.52581,
-    lng: 3.396,
-  },
-  {
-    name: "University of Lagos Medical Centre",
-    lat: 6.5145,
-    lng: 3.3965,
-  },
-  {
-    name: "Gold Cross Hospital (near UNILAG)",
-    lat: 6.516,
-    lng: 3.397,
-  },
-  {
-    name: "Cottage Medicare Hospital",
-    lat: 6.514,
-    lng: 3.395,
-  },
-  {
-    name: "Light Hospital & Maternity Home",
-    lat: 6.5125,
-    lng: 3.398,
-  },
-];
+// const allHospitals = [
+//   {
+//     name: "Unilag Medical Centre",
+//     lat: 6.51454,
+//     lng: 3.39655,
+//   },
+//   {
+//     name: "Lagos University Teaching Hospital (LUTH)",
+//     lat: 6.52581,
+//     lng: 3.396,
+//   },
+//   {
+//     name: "University of Lagos Medical Centre",
+//     lat: 6.5145,
+//     lng: 3.3965,
+//   },
+//   {
+//     name: "Gold Cross Hospital (near UNILAG)",
+//     lat: 6.516,
+//     lng: 3.397,
+//   },
+//   {
+//     name: "Cottage Medicare Hospital",
+//     lat: 6.514,
+//     lng: 3.395,
+//   },
+//   {
+//     name: "Light Hospital & Maternity Home",
+//     lat: 6.5125,
+//     lng: 3.398,
+//   },
+// ];
 
 export const createHospital = catchAsync(async (req, res, next) => {
   const name = req.body?.name;
@@ -48,15 +48,15 @@ export const createHospital = catchAsync(async (req, res, next) => {
   if (!lat || !long)
     return next(new AppError("Hospital coordinates are required", 400));
 
-  const allLocations = allHospitals.map((el) => {
-    return {
-      name: el.name,
-      location: {
-        type: "Point",
-        coordinates: [Number(el.lat), Number(el.lng)],
-      },
-    };
-  });
+  // const allLocations = allHospitals.map((el) => {
+  //   return {
+  //     name: el.name,
+  //     location: {
+  //       type: "Point",
+  //       coordinates: [Number(el.lat), Number(el.lng)],
+  //     },
+  //   };
+  // });
 
   // await Hospital.bulkCreate(allLocations);
 
@@ -117,8 +117,8 @@ export const findNearestAmbulance = catchAsync(async (req, res, next) => {
     SELECT
       a.id,
       a.name,
-      ST_Y(a.location::geometry) AS lat,
-      ST_X(a.location::geometry) AS lng,
+      ST_Y(a.location::geometry) AS lng,
+      ST_X(a.location::geometry) AS lat,
       ST_Distance(a.location, h.location) AS distance
     FROM ambulances a
     JOIN hospitals h ON h.id = :hospitalId
