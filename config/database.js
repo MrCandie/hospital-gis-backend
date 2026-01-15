@@ -3,28 +3,18 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const isProduction = !process.env.NODE_ENV === "production";
-
-const sequelize = new Sequelize(process.env.DATABASE_URL, {
-  dialect: "postgres",
-  logging: false,
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false,
+const sequelize = new Sequelize(
+  "postgresql://hospital_gis_user:CL9isjGaHyzHh1G16mb22ZxkvH6dWhnp@dpg-d5kd2b7fte5s73cj8b6g-a.virginia-postgres.render.com/hospital_gis",
+  {
+    dialect: "postgres",
+    logging: false,
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
     },
-  },
-});
-
-// : new Sequelize(process.env.DATABASE_URL, {
-//     dialect: "postgres",
-//     logging: false,
-//     dialectOptions: {
-//       ssl: {
-//         require: true,
-//         rejectUnauthorized: false,
-//       },
-//     },
-//   });
+  }
+);
 
 export default sequelize;
